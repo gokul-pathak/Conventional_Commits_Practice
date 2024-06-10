@@ -8,7 +8,9 @@ users = {'user1': 'password1'}
 
 @app.route('/')
 def home():
-    return "Welcome to the Home Page"
+    if 'username' in session:
+        return f"Welcome {session['username']}! <br> <a href='/logout'>Logout</a>"
+    return "Welcome to the Home Page <br> <a href='/login'>Login</a> - Updated"
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
