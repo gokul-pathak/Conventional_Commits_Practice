@@ -1,4 +1,3 @@
-# app.py
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 
 app = Flask(__name__)
@@ -8,7 +7,9 @@ users = {'user1': 'password1'}
 
 @app.route('/')
 def home():
-    return "Welcome to the Home Page"
+    if 'username' in session:
+        return f"Welcome {session['username']}! <br> <a href='/logout'>Logout</a>"
+    return "Welcome to the Home Page <br> <a href='/login'>Login</a>"
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -25,6 +26,10 @@ def login():
             flash('Invalid credentials')
     return render_template('login.html')
 
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('home'))
 
 if __name__ == '__main__':
     app.run(debug=True)
