@@ -15,12 +15,16 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        if not username:
+            flash('Username is required')
+            return redirect(url_for('login'))
         if username in users and users[username] == password:
             session['username'] = username
             return redirect(url_for('home'))
         else:
             flash('Invalid credentials')
     return render_template('login.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
