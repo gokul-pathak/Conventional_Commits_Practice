@@ -1,0 +1,10 @@
+{
+  "name": "Flask-Auth-App",
+  "version": "2.1.0",
+  "devDependencies": {
+    "standard-version": "^9.5.0"
+  },
+  "scripts": {
+    "release": "standard-version"
+  }
+}
